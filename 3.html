@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+</head>
+<script>
+    window.onload = function () {
+        if (window.MecoDebugInterface) {
+            var meco = document.getElementById("meco");
+            meco.innerHTML += "ua: " + navigator.userAgent + "<br><br>";
+            var mecoParam = window.MecoDebugInterface.getMecoDebugInfo();
+            var json = JSON.parse(mecoParam);
+            for (var key in json) {
+                meco.innerHTML += key + ":<br>" + json[key] + "<br><br>";
+            }
+        }
+    }
+</script>
+<body>
+    <h2>调试专用页</h2>
+    <div id="meco"></div>
+</body>
+</html>
