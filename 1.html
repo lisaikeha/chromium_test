@@ -5,11 +5,12 @@
   <meta http-equiv="Content-Security-Policy" content="require-trusted-types-for 'script'; trusted-types 'none';">
 </head>
 <body>
-  <iframe srcdoc="test" id="frame1"></iframe>
-  <iframe srcdoc="test" id="frame2"></iframe>
+  <div id="div" onclick="return false;">CLICK</div>
+  <script id="script" src="foo" type="invalid"></script>
   <script>
-    frame1.attributes.srcdoc.nodeValue='<img src=x onerror=alert(origin)>';
-    frame2.attributes.srcdoc.textContent='<img src=x onerror=alert(origin)>';
+    div.attributes.onclick.nodeValue='alert(/div-onclick/)';
+    script.type="text/javascript";
+    script.attributes.src.nodeValue='data:,alert(/script-src/)';
   </script>
 </body>
 </html>
