@@ -1,0 +1,28 @@
+​​<html>
+<body>
+bla
+<script>
+var target0 = document.createElement("div");
+target0.style.width = "20px";
+target0.style.height = "20px";
+target0.style.backgroundColor = "transparent";
+document.body.appendChild(target0);
+Object.defineProperty(Object.prototype, 'then', {
+    get: function () {
+      if (this.toString() == "[object Animation]") {
+        new DocumentTimeline({ originTime: 500 });
+      }
+    }
+});
+async function poc()
+{
+    anim0 = target0.animate({ opacity: [0, 1] }, 1);
+    anim0.finished.then(async function () {
+    });
+    return;
+}
+poc();
+</script>
+</body>
+</html>
+
